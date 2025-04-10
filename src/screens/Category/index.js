@@ -1,4 +1,5 @@
 // NPM Packages
+import { useLayoutEffect } from 'react';
 import {
   FlatList,
   Text,
@@ -12,11 +13,29 @@ import MealItem from './../../components/MealItem';
 import styles from './styles';
 
 // Data
-import { MEALS } from './../../data';
+import { CATEGORIES, MEALS } from './../../data';
+
+// Constants
+const SCREEN_MEAL_NAME = 'meal';
 
 function Category(props) {
   // Navigation
   const categoryId = props.route.params.categoryId;
+  const category = CATEGORIES.find(category => category.id = categoryId);
+
+  // Hooks
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      title: category.title,
+    });
+  }, [categoryId, props.navigation]);
+
+  // Handlers
+  function handlePress(mealId) {
+    console.log('mealId: ', mealId);
+
+    props.navigation.navigate(SCREEN_MEAL_NAME, { mealId });
+  }
 
   // Helpers
   function getMeals() {
@@ -31,7 +50,7 @@ function Category(props) {
           meal: itemData.item,
         }}
         handlers={{
-          press: () => {},
+          press: _ => handlePress(itemData.item.id),
         }}
       />
     );
