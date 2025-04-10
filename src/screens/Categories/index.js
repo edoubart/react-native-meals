@@ -14,7 +14,12 @@ import styles from './styles';
 // Data
 import { CATEGORIES } from './../../data';
 
-function Categories() {
+function Categories(props) {
+  // Handlers
+  function handlePress() {
+    props.navigation.navigate('Category');
+  }
+
   // Renderers
   function renderCategory(itemData) {
     return (
@@ -22,6 +27,9 @@ function Categories() {
         data={{
           color: itemData.item.color,
           title: itemData.item.title,
+        }}
+        handlers={{
+          press: handlePress,
         }}
       />
     );

@@ -9,6 +9,7 @@ function CategoryGridTile(props) {
     <View style={styles.categoryGridTile}>
       <Pressable
         android_ripple={{ color: '#ccc' }}
+        onPress={props.handlers.press}
         style={({ pressed }) => {
           return [styles.button, pressed ? styles.buttonPressed : null];
         }}
