@@ -16,8 +16,8 @@ import { CATEGORIES } from './../../data';
 
 function Categories(props) {
   // Handlers
-  function handlePress() {
-    props.navigation.navigate('Category');
+  function handlePress(categoryId) {
+    props.navigation.navigate('Category', { categoryId });
   }
 
   // Renderers
@@ -29,7 +29,7 @@ function Categories(props) {
           title: itemData.item.title,
         }}
         handlers={{
-          press: handlePress,
+          press: _ => handlePress(itemData.item.id),
         }}
       />
     );
